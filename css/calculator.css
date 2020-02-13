@@ -1,0 +1,36 @@
+/*** common css ***/
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body, html{
+    height: 100%;
+    width: 100%;
+    background: #f1f1f1;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container{
+    max-width: 300px;
+    position: absolute;
+    left: 50%;
+    top: 37%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+.container h1{
+    font-size: 50px;
+    color: black;
+}
+.container h3{
+    color: #aaa;
+    font-size: 30px;
+    margin-top: 10px;
+}
+h2.webdevorg{
+    float: right;
+    margin: 10px;
+    font-size: 22px;
+    color: #aaa;
+}
