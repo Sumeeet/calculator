@@ -12,6 +12,7 @@
 exports.parseExpr = (expr) => {
   // minus in the begining of expression fails i.e. -2 + 3 gives 5 instead of 1
   if (!isValid(expr)) {
+    // log message
     console.error("Invalid expression. Please provide valid expression i.e 3 + 2");
     return expr;
   }
