@@ -19,6 +19,7 @@ The `calculator` is a JavaScript-based library designed to parse, convert, and e
 ## Recent Updates
 
 1. **`.gitattributes` File**:
+
    - Added to normalize line endings and handle file types consistently across different operating systems.
 
 2. **`run_git_normalization.sh` Script**:
@@ -125,6 +126,16 @@ Contributions are welcome! If you have ideas for new features or improvements, f
 2. Create a feature branch.
 3. Commit your changes.
 4. Push the branch and create a pull request.
+
+---
+
+## Exported Functions
+
+The `calculator` library provides the following exported functions:
+
+- **`parseExpr`**: Parses an infix algebraic expression, converts it to postfix notation, and evaluates the result.
+
+Currently, `parseExpr` is the only function accessible outside the `calculator.js` file. If you need access to additional internal functions, consider exporting them explicitly in `calculator.js`.
 
 ---
 
