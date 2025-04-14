@@ -249,7 +249,7 @@ function evaluatePostfixExpression(infixExpr, postfixTokens) {
  * @returns {number} - The evaluated result of the expression.
  * @throws {Error} - Throws an error if the input is invalid or unsupported.
  */
-exports.parseExpr = (expr) => {
+export const parseExpr = (expr) => {
   if (typeof expr !== "string" || expr.trim() === "") {
     throw new Error(
       "Invalid expression: Expression must be a non-empty string.",
