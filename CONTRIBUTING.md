@@ -9,6 +9,7 @@ Thank you for your interest in contributing to the Calculator project! This docu
 We follow a structured branching model to ensure code quality and maintainability. Please adhere to the following conventions when creating branches:
 
 ### Branch Types and Naming Conventions
+
 - **Feature branches**: `feature/<feature-name>`
   - For new features or enhancements.
   - Example: `feature/add-calculator-ui`
@@ -26,6 +27,7 @@ We follow a structured branching model to ensure code quality and maintainabilit
   - Example: `issue-123`
 
 ### Rules
+
 - Branch names **must** follow the naming conventions above.
 - Direct commits to `main` or `develop` are **not allowed**. All changes must go through a pull request.
 
@@ -34,19 +36,23 @@ We follow a structured branching model to ensure code quality and maintainabilit
 ## Pull Request Workflow
 
 1. **Create a branch**:
+
    - Use the appropriate naming convention for your branch.
    - Ensure your branch is based on the latest `develop` branch.
 
 2. **Make changes**:
+
    - Write clean, well-documented code.
    - Ensure your changes are covered by tests.
 
 3. **Run tests locally**:
+
    - Run `npm install` to install dependencies.
    - Run `npm test` to ensure all tests pass.
    - Run `npm run lint` to check for linting issues.
 
 4. **Submit a pull request**:
+
    - Open a pull request against the `develop` branch.
    - Provide a clear description of your changes.
    - Link any related issues in the pull request description.
@@ -62,18 +68,23 @@ We follow a structured branching model to ensure code quality and maintainabilit
 Our CI/CD pipeline is automated using GitHub Actions. The following steps are performed for every branch and pull request:
 
 1. **Branch Name Validation**:
+
    - Ensures the branch name follows the naming conventions.
 
 2. **Dependency Installation**:
+
    - Installs all required dependencies using `npm install`.
 
 3. **Build Validation**:
+
    - Runs `npm run build --if-present` to validate the build process.
 
 4. **Code Quality Checks**:
+
    - Runs `npm run lint` to check for linting issues.
 
 5. **Automated Tests**:
+
    - Runs `npm test` to execute all unit tests.
 
 6. **Environment**:

@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 /* eslint-env mocha */
 import assert from "assert";
 import { parseExpr } from "../calculator.js";

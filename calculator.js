@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 const OPERATOR_PRECEDENCE = {
   "*": 3,
   "/": 3,

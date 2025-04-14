@@ -5,11 +5,11 @@ on:
     branches:
       - main
       - develop
-      - 'feature/*'
-      - 'bugfix/*'
-      - 'hotfix/*'
-      - 'release/*'
-      - 'issue-*'
+      - "feature/*"
+      - "bugfix/*"
+      - "hotfix/*"
+      - "release/*"
+      - "issue-*"
   pull_request:
 
 jobs:
