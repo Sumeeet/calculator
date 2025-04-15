@@ -8,22 +8,27 @@ The `calculator` is a JavaScript-based library designed to parse, convert, and e
 
 ## Features
 
-- **Arithmetic Operations**: Supports addition (`+`), subtraction (`-`), multiplication (`*`), and division (`/`).
+- **Arithmetic Operations**: Supports addition (`+`), subtraction (`-`), multiplication (`*`), division (`/`), and exponentiation (`^`).
 - **Parentheses Handling**: Supports nested parentheses for proper operator precedence.
 - **Expression Parsing**: Converts infix expressions to postfix notation using the Shunting Yard algorithm.
 - **Error Handling**: Provides detailed error messages for invalid expressions or unsupported tokens.
 - **Division by Zero Handling**: Explicitly handles cases like `0 / 0` and `1 / 0`.
+- **Negative Numbers**: Supports negative numbers in expressions (e.g., `2^-2`).
+- **Right-Associative Operators**: Handles right-associativity for operators like `^`.
 
 ---
 
 ## Recent Updates
 
-1. **`.gitattributes` File**:
+1. **Negative Number Support**:
+   - Added support for negative numbers in expressions (e.g., `2^-2`).
+   - Updated `isNumber` function to handle both positive and negative numbers.
 
-   - Added to normalize line endings and handle file types consistently across different operating systems.
+2. **Exponentiation**:
+   - Implemented right-associativity for the `^` operator (e.g., `2^2^3` is evaluated as `2^(2^3)`).
 
-2. **`run_git_normalization.sh` Script**:
-   - A utility script to normalize all files in the repository according to the `.gitattributes` rules.
+3. **Improved Error Handling**:
+   - Enhanced error messages for invalid expressions and unsupported tokens.
 
 ---
 
@@ -66,6 +71,10 @@ try {
 } catch (error) {
   console.error(error.message); // Output: Unsupported token encountered: '^'
 }
+
+// Exponentiation
+console.log(calculator.parseExpr("2^3")); // Output: 8
+console.log(calculator.parseExpr("2^2^3")); // Output: 256 (Right-associative)
 ```
 
 ---

@@ -110,10 +110,6 @@ describe("Calculator", () => {
   });
 
   describe("Invalid Expressions", () => {
-    it("should throw an error for invalid characters in the expression", () => {
-      assert.throws(() => parseExpr("2^3"), /Unsupported token encountered/);
-    });
-
     it("should throw an error for incomplete expressions like '3+'", () => {
       assert.throws(() => parseExpr("3+"), /Invalid expression/);
     });
@@ -165,6 +161,28 @@ describe("Calculator", () => {
 
     it("should correctly evaluate an expression with multiple operators", () => {
       assert.strictEqual(parseExpr("3 + 4 * 2 / (1 - 5)"), 1);
+    });
+  });
+
+  describe("Exponentiation Tests", () => {
+    it("should return 8 when the expression is 2 ^ 3", () => {
+      assert.strictEqual(parseExpr("2^3"), 8);
+    });
+
+    it("should return 1 when the expression is 2 ^ 0", () => {
+      assert.strictEqual(parseExpr("2^0"), 1);
+    });
+
+    it("should return 0.25 when the expression is 2 ^ -2", () => {
+      assert.strictEqual(parseExpr("2^-2"), 0.25);
+    });
+
+    it("should return 16 when the expression is (2 + 2) ^ 2", () => {
+      assert.strictEqual(parseExpr("(2+2)^2"), 16);
+    });
+
+    it("should return 256 when the expression is 2 ^ 2 ^ 3", () => {
+      assert.strictEqual(parseExpr("2^2^3"), 256); // Right-associative
     });
   });
 });

@@ -1,11 +1,12 @@
 const OPERATOR_PRECEDENCE = {
+  "^": 4, // Add exponentiation with the highest precedence
   "*": 3,
   "/": 3,
   "+": 2,
   "-": 2,
 };
 
-const SUPPORTED_OPERATORS = /[*/+-]/;
+const SUPPORTED_OPERATORS = /[*/+\-^]/; // Add '^' to supported operators
 const SUPPORTED_PARENS = /[()]/;
 
 const ERRORS = {
@@ -18,17 +19,28 @@ const ERRORS = {
   MISMATCHED_PARENS: "Mismatched parentheses in the expression.",
 };
 
+const ASSOCIATIVITY = {
+  "^": "right", // Exponentiation is right-associative
+  "*": "left", // Multiplication is left-associative
+  "/": "left", // Division is left-associative
+  "+": "left", // Addition is left-associative
+  "-": "left", // Subtraction is left-associative
+};
+
 /**
  * Checks if a string is a valid number.
  * Example:
  *   isNumber("123") -> true
+ *   isNumber("-123") -> true
+ *   isNumber("+123") -> true
  *   isNumber("12.34") -> true
+ *   isNumber("-12.34") -> true
  *   isNumber("abc") -> false
  * @param {string} str - The string to check.
  * @returns {boolean} - True if the string is a valid number, false otherwise.
  */
 function isNumber(str) {
-  return /^(\d+(\.\d+)?|\.\d+)$/.test(str);
+  return /^[-+]?\d+(\.\d+)?$/.test(str);
 }
 
 /**
@@ -70,7 +82,7 @@ function tokenizeExpression(expr) {
   const tokens = [];
   let currentNumber = "";
 
-  expr.split("").forEach((char) => {
+  expr.split("").forEach((char, index) => {
     if (char === " ") {
       // Skip spaces
     } else if (isNumber(char) || char === ".") {
@@ -80,7 +92,16 @@ function tokenizeExpression(expr) {
         tokens.push(currentNumber);
         currentNumber = "";
       }
-      tokens.push(char);
+
+      // Handle negative numbers
+      if (
+        char === "-" &&
+        (index === 0 || isOperator(expr[index - 1]) || expr[index - 1] === "(")
+      ) {
+        currentNumber = "-"; // Start a negative number
+      } else {
+        tokens.push(char);
+      }
     } else {
       throw new Error(ERRORS.UNSUPPORTED_TOKEN(char));
     }
@@ -118,16 +139,28 @@ function convertToPostfix(infixTokens) {
       outputQueue.push(token);
     } else if (isOperator(token)) {
       // Check for consecutive operators
-      if (index > 0 && isOperator(infixTokens[index - 1])) {
+      if (
+        index > 0 &&
+        isOperator(infixTokens[index - 1]) &&
+        !(infixTokens[index - 1] === "^" && token === "-")
+      ) {
         throw new Error(
           `Invalid expression: Consecutive operators '${infixTokens[index - 1]}' and '${token}' are not allowed.`,
         );
       }
+
+      // Handle operator precedence and associativity
       while (
         operatorStack.length > 0 &&
-        OPERATOR_PRECEDENCE[token] <=
+        operatorStack[operatorStack.length - 1] !== "(" &&
+        // For left-associative operators, pop if precedence is greater or equal
+        ((OPERATOR_PRECEDENCE[token] <=
           OPERATOR_PRECEDENCE[operatorStack[operatorStack.length - 1]] &&
-        operatorStack[operatorStack.length - 1] !== "("
+          ASSOCIATIVITY[token] === "left") ||
+          // For right-associative operators, pop only if precedence is greater
+          (OPERATOR_PRECEDENCE[token] <
+            OPERATOR_PRECEDENCE[operatorStack[operatorStack.length - 1]] &&
+            ASSOCIATIVITY[token] === "right"))
       ) {
         outputQueue.push(operatorStack.pop());
       }
@@ -176,6 +209,7 @@ function convertToPostfix(infixTokens) {
  */
 function performOperation(operator, first, second) {
   const OPERATIONS = {
+    "^": (a, b) => Math.pow(a, b), // Add exponentiation logic
     "*": (a, b) => a * b,
     "/": (a, b) => {
       if (b === 0) {
