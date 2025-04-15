@@ -3,13 +3,14 @@ name: Node.js CI
 on:
   push:
     branches:
-      - main
+      - master
       - develop
       - "feature/*"
       - "bugfix/*"
       - "hotfix/*"
       - "release/*"
       - "issue-*"
+      - "dependabot/npm_and_yarn/*" # Added Dependabot branches
   pull_request:
 
 jobs:
@@ -27,7 +28,7 @@ jobs:
       - name: Validate branch name
         run: |
           BRANCH_NAME=$(echo "${GITHUB_REF#refs/heads/}")
-          if [[ ! "$BRANCH_NAME" =~ ^(feature|bugfix|hotfix|release|issue-[0-9]+)$ ]]; then
+          if [[ ! "$BRANCH_NAME" =~ ^(master|develop|feature/.*|bugfix/.*|hotfix/.*|release/.*|issue-[0-9]+|dependabot/npm_and_yarn/.*)$ ]]; then
             echo "Error: Branch name '$BRANCH_NAME' does not follow the naming convention."
             exit 1
           fi
