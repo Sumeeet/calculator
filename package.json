@@ -1,7 +1,7 @@
 {
   "name": "calculator",
   "version": "1.0.0",
-  "description": "calculator is vanilla javascript based application for learning purpose. it has 2 modes Standard and Programmers mode. Ideas are taken from microsoft calculator app on windows 10. Not all the features are replicated, only selected ones.",
+  "description": "Calculator is a vanilla JavaScript-based application for learning purposes. It has 2 modes: Standard and Programmers mode. Ideas are taken from the Microsoft Calculator app on Windows 10. Not all features are replicated, only selected ones.",
   "main": "calculator.js",
   "type": "module",
   "directories": {
@@ -22,6 +22,14 @@
     "url": "https://github.com/WebDevsOrg/calculator/issues"
   },
   "homepage": "https://github.com/WebDevsOrg/calculator#readme",
+  "files": [
+    "calculator.js",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./calculator.js"
+  },
+  "keywords": ["calculator", "math", "standard mode", "programmers mode", "javascript"],
   "devDependencies": {
     "@eslint/js": "^9.24.0",
     "eslint": "^9.24.0",
